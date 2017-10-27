@@ -137,8 +137,8 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = 'home'
+#############################################################################
 
-###############################################3
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sdp02342017@gmail.com'
