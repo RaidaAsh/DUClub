@@ -5,8 +5,6 @@ from django.views.generic.base import TemplateView
 from django.template import RequestContext
 import MySQLdb
 import abc, six
-#########################################
-from fusioncharts import FusionCharts
 ##################################################################################
 ########################### Singleton Pattern ####################################
 ##################################################################################
@@ -35,31 +33,3 @@ class dbase():
 ##################################################################################
 ##################################################################################
 ##################################################################################
-def makeChart(request):
-    conn=dbase()
-    cursor=conn.getCursor()
-    cursor.execute("select distinct FoodName, FoodPrice from FoodItem")
-    row=cursor.fetchall()
-    dataSource = {}
-    dataSource['chart'] = { 
-	    "caption": "Food and Price",
-	    "subCaption": "DUClub",
-	    "xAxisName": "Item",
-	    "yAxisName": "Price (In Taka)",
-	    "numberPrefix": "Taka",
-	    "theme": "carbon"
-    }
-
-    # The data for the chart should be in an array where each element of the array is a JSON object
-    # having the `label` and `value` as key value pair.
-    dataSource['data'] = []
-    # Iterate through the data in `Revenue` model and insert in to the `dataSource['data']` list.
-    for key in row:
-        data = {}
-	data['label'] = key[0]
-	data['value'] = key[1]
-	dataSource['data'].append(data)
-
-    # Create an object for the Column 2D chart using the FusionCharts class constructor        	  		
-	column2D = FusionCharts("column2D", "ex1" , "1000", "650", "chart-1", "json", dataSource)
-    return render(request, 'chart.html', {'output': column2D.render()})

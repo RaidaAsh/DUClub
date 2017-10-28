@@ -32,8 +32,7 @@ urlpatterns = [
     url(r'^lounge/', include('lounge.urls')),
     url(r'^bill/', include('bill.urls')),
     url(r'^food/', include('food.urls')),
-    url(r'^mail/', include('mail.urls')),
-    url(r'^chart/', makeChart),
+    url(r'^charts/', include('charts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
